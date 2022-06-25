@@ -30,6 +30,7 @@ class User:
         print("******************")
         encodePassword= password.encode('utf8');
         print(encodePassword)
+        print("******************")
         if not bcrypt.checkpw(encodePassword, user[0]):
             raise WebError("password incorrect", status_code=401)
         else:
