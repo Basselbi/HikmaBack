@@ -12,7 +12,7 @@ from admin_api.single_patient_data_export import single_patient_export
 import uuid
 import bcrypt
 import psycopg2.errors
-
+from uuid import uuid4
 
 admin_api = Blueprint('admin_api', __name__, url_prefix='/admin_api')
 
@@ -22,7 +22,8 @@ def login():
     params = assert_data_has_keys(request, {'email', 'password'})
     print(params)
     user = User.authenticateWithoutLang(params['email'], params['password'])
-    token = user.create_token()
+    #token = user.create_token()
+    token = uuid4()
     return jsonify({'token': token})
 
 
