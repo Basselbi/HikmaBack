@@ -28,7 +28,9 @@ class User:
         print("******************")
         #print(user[0].decode())
         print("******************")
-        encodePassword = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+        encoded = password.encode()
+        print(encoded)
+        encodePassword = bcrypt.hashpw(encoded, bcrypt.gensalt()).decode()
         print(encodePassword)
         print("******************")
         if not bcrypt.checkpw(encodePassword, user[0]):
