@@ -8,8 +8,16 @@ from test_api.test_api import test_api
 from web_errors import WebError
 from config import FLASK_DEBUG, FLASK_DEBUG_PORT
 import startup_tasks
+from cryptography.fernet import Fernet
 
-
+def generate_key():
+    """
+    Generates a key and save it into a file
+    """
+    key = Fernet.generate_key()
+    with open("secret.key", "wb") as key_file:
+        key_file.write(key)
+generate_key()
 app = Flask(__name__)
 CORS(app)
 app.url_map.strict_slashes = False
