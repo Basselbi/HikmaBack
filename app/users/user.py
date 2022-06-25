@@ -1,7 +1,7 @@
 import users.data_access as db
 from web_errors import WebError
 from language_strings.language_string import LanguageString
-
+import bcrypt
 import bcrypt
 
 
@@ -28,7 +28,7 @@ class User:
         print("******************")
         #print(user[0].decode())
         print("******************")
-        encodePassword= password.encode(encodeing='utf8')
+        encodePassword = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
         print(encodePassword)
         print("******************")
         if not bcrypt.checkpw(encodePassword, user[0]):
