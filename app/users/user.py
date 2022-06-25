@@ -28,7 +28,7 @@ class User:
         print("******************")
         print(user[0])
         print("******************")
-        decodedPassword = cryptography_util.encrypt_passowrd(password)
+        decodedPassword = cryptography_util.decrypt_passowrd(user[0])
         print("********deecdoded password +passowrd**********")
         print(decodedPassword)
              
