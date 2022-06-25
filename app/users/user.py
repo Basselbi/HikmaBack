@@ -28,7 +28,7 @@ class User:
         print("******************")
         print(user[0])
         print("******************")
-        encodePassword= password.encode('utf8');
+        encodePassword= password.encode();
         print(encodePassword)
         print("******************")
         if not bcrypt.checkpw(encodePassword, user[0]):
