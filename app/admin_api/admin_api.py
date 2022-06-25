@@ -8,7 +8,7 @@ from users.data_access import all_user_data, add_user, delete_user_by_id, user_d
 from language_strings.language_string import LanguageString
 from admin_api.patient_data_export import most_recent_export
 from admin_api.single_patient_data_export import single_patient_export
-
+import cryptography_util
 import uuid
 import bcrypt
 import psycopg2.errors
@@ -52,13 +52,13 @@ def create_user():
     language = params.get('language', 'en')
     #name_str = LanguageString(id=str(uuid.uuid4()), content_by_language={language: params['name']})
     name_str = params['name']
-    hashed_password = bcrypt.hashpw(params['password'].encode(), bcrypt.gensalt()).decode()
+    hashed_password = cryptography_util.encrypt_passowrd(params['password']) 
+    decrypter = cryptography_util.decrypt_passowrd(hashed_password) 
     user = User(id, name_str, params['role'], params['email'], hashed_password)
     print(id)
     print(name_str)
-    print(params['role'])
-    print(params['email'])
     print(hashed_password)
+    print(decrypter)
     try:
         add_user(user)
     except psycopg2.errors.UniqueViolation:
