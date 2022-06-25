@@ -26,11 +26,14 @@ class User:
         print(email)
         user = db.user_password_by_email(email)
         print("******************")
-        #print(user[0].decode())
+        print(user[0])
         print("******************")
         encoded = password.encode()
+        
         print(encoded)
         encodePassword = bcrypt.hashpw(encoded, bcrypt.gensalt()).decode()
+        if(encodePassword == user[0])
+            print("yes")
         print(encodePassword)
         print("******************")
         if not bcrypt.checkpw(encodePassword, user[0]):
