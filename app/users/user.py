@@ -3,7 +3,7 @@ from web_errors import WebError
 from language_strings.language_string import LanguageString
 import bcrypt
 import bcrypt
-
+import cryptography_util
 
 class User:
     def __init__(self, id, name, role, email, hashed_password):
@@ -28,12 +28,12 @@ class User:
         print("******************")
         print(user[0])
         print("******************")
-        encoded = password.encode()
-        
-        print(encoded)
-        encodePassword = bcrypt.hashpw(encoded, bcrypt.gensalt()).decode()       
-        print("yes")
-        print(encodePassword)
+        decodedPassword = cryptography_util.decrypt_passowrd(user[0])
+        print("********deecdoded password +passowrd**********")
+        print(decodedPassword)
+             
+       
+        print(password)
         print("******************")
         return user[0]
         #if not bcrypt.checkpw(encodePassword, user[0]):

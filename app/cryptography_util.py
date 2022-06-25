@@ -19,13 +19,7 @@ def encrypt_passowrd(message):
     Encrypts a message
     """
     key = load_key()
-    print("***************")
-    print(key)
-    print("***************")
     encoded_message = message.encode()
-    print("@@@@@@@")
-    print(encoded_message)
-    print("@@@@@@@")
     f = Fernet(key)
     encrypted_message = f.encrypt(encoded_message)
 
