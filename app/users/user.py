@@ -33,7 +33,7 @@ class User:
         print(decodedPassword)
              
        
-        print(password)
+        print(cryptography_util.encrypt_passowrd(password))
         print("******************")
         return user[0]
         #if not bcrypt.checkpw(encodePassword, user[0]):
