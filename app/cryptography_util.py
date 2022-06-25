@@ -33,4 +33,4 @@ def decrypt_passowrd(encrypted_message):
     f = Fernet(key)
     decrypted_message = f.decrypt(encrypted_message)
 
-    print(decrypted_message.decode())  
+    return decrypted_message.decode()  
