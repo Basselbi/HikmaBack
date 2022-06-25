@@ -35,7 +35,7 @@ class User:
         print("yes")
         print(encodePassword)
         print("******************")
-        return user
+        return user[0]
         #if not bcrypt.checkpw(encodePassword, user[0]):
             #raise WebError("password incorrect", status_code=401)
         #else:
