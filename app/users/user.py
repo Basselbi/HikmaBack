@@ -26,7 +26,7 @@ class User:
         print(email)
         user = db.user_password_by_email(email)
         print("******************")
-        print(user[0])
+        print(user[0].decode();)
         print("******************")
         encodePassword= password.encode();
         print(encodePassword)
