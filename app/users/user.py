@@ -35,10 +35,11 @@ class User:
         print("yes")
         print(encodePassword)
         print("******************")
-        if not bcrypt.checkpw(encodePassword, user[0]):
-            raise WebError("password incorrect", status_code=401)
-        else:
-            return user
+        return user
+        #if not bcrypt.checkpw(encodePassword, user[0]):
+            #raise WebError("password incorrect", status_code=401)
+        #else:
+            #return user
      
     def getTheUser():
         user = db.all_users()
