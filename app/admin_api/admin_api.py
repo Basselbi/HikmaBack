@@ -49,23 +49,23 @@ def create_user():
         raise WebError('Role must be either "admin" or "provider"', 400)
 
     id = str(uuid.uuid4())
-    language = params.get('language', 'en')
+    #language = params.get('language', 'en')
     #name_str = LanguageString(id=str(uuid.uuid4()), content_by_language={language: params['name']})
     name_str = params['name']
     hashed_password = cryptography_util.encrypt_passowrd(params['password']) 
-    decrypter = cryptography_util.decrypt_passowrd(hashed_password) 
-    user = User(id, name_str, params['role'], params['email'], hashed_password)
-    print(id)
-    print(name_str)
+    print("------------------------")
     print(hashed_password)
+    decrypter = cryptography_util.decrypt_passowrd(hashed_password) 
     print(decrypter)
-    try:
-        add_user(user)
-    except psycopg2.errors.UniqueViolation:
-        raise WebError('User already exists', 409)
+    print("------------------------")
+    user = User(id, name_str, params['role'], params['email'], hashed_password)
+    # try:
+    #     add_user(user)
+    # except psycopg2.errors.UniqueViolation:
+    #     raise WebError('User already exists', 409)
 
-    all_users = [User.from_db_row(r).to_dict() for r in all_user_data()]
-    return jsonify({'users': all_users})
+    #all_users = [User.from_db_row(r).to_dict() for r in all_user_data()]
+    return jsonify({'users': "ok"})
 
 
 @admin_api.route('/user', methods=['DELETE'])
