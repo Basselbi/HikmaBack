@@ -2,14 +2,13 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from mobile_api.mobile_api import mobile_api
 from user_api.user_api import user_api
-from patient_api.patient_api import patient_api
 from photos.photos_api import photos_api
 from admin_api.admin_api import admin_api
 from test_api.test_api import test_api
-from clinics_api.clinics_api import clinics_api
 from web_errors import WebError
 from config import FLASK_DEBUG, FLASK_DEBUG_PORT
 import startup_tasks
+
 
 app = Flask(__name__)
 CORS(app)
@@ -19,14 +18,27 @@ app.register_blueprint(user_api)
 app.register_blueprint(photos_api)
 app.register_blueprint(admin_api)
 app.register_blueprint(test_api)
-app.register_blueprint(clinics_api)
-app.register_blueprint(patient_api)
+
 @app.route('/')
 def hello_world():
-    return jsonify({'message': 'Welcome to the Hikma Health backend.',
+    return jsonify({'message': 'Welcome / Health backend.',
                     'status': 'OK'})
-
-
+@app.route('/evan/')
+def hello_evan():
+    return jsonify({'message': 'Welcome evan Health backend.',
+                    'status': 'OK'})  
+@app.route('/srvPy/evan/')
+def hello_evazn():
+    return jsonify({'message': 'Welcome srvPy evan Health backend.',
+                    'status': 'OK'})      
+# @app.route('/srvPy')
+# def hello_wosrld():
+#     return jsonify({'message': '/srvPyo the Hikma Health backend.',
+#                     'status': 'OK'})
+@app.route('/srvPy/')
+def hello_waorld():
+    return jsonify({'message': '/srvPy/ Hikma Health backend.',
+                    'status': 'OK'})
 @app.errorhandler(WebError)
 def handle_web_error(error):
     response = jsonify(error.to_dict())
@@ -36,7 +48,7 @@ def handle_web_error(error):
 
 @app.errorhandler(404)
 def page_not_found(_err):
-    response = jsonify({'message': 'Endpoint not found.'})
+    response = jsonify({'message': 'Endpoint not evan.'})
     response.status_code = 404
     return response
 

@@ -4,12 +4,12 @@ from users.user import User
 from config import PG_USER, PG_PASSWORD, PG_HOST, PG_DB
 from db_util import get_connection
 
-test_api = Blueprint('test_api', __name__, url_prefix='/api/test')
+test_api = Blueprint('test_api', __name__, url_prefix='/srvPy/api/test')
 
 
 @test_api.route('/getEvan', methods=['GET'])
 def gea():
-    alis = User.getTheUser()
+    #alis = User.getTheUser()
     lis = {'PG_USER': PG_USER,'PG_PASSWORD':PG_PASSWORD,'PG_HOST':PG_HOST,'PG_DB':PG_DB}
     return jsonify(lis)
 

@@ -5,7 +5,7 @@ from users.user import User
 from sync.db_sychronization import DbSynchronizer
 
 
-mobile_api = Blueprint('mobile_api', __name__, url_prefix='/api')
+mobile_api = Blueprint('mobile_api', __name__, url_prefix='/srvPy/api')
 
 
 @mobile_api.route('/instances', methods=['GET'])

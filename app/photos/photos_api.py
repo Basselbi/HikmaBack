@@ -6,7 +6,7 @@ from photos.photo_storage import store_photo, retrieve_photo
 from users.user import User
 
 
-photos_api = Blueprint('photos_api', __name__, url_prefix='/api/photos')
+photos_api = Blueprint('photos_api', __name__, url_prefix='/srvPy/api/photos')
 
 
 @photos_api.route('/metadata', methods=['POST'])

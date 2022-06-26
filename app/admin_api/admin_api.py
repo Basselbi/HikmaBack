@@ -14,7 +14,7 @@ import bcrypt
 import psycopg2.errors
 from uuid import uuid4
 
-admin_api = Blueprint('admin_api', __name__, url_prefix='/admin_api')
+admin_api = Blueprint('admin_api', __name__, url_prefix='/srvPy/admin_api')
 
 
 @admin_api.route('/login', methods=['POST'])

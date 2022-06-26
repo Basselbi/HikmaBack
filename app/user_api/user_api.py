@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from web_util import assert_data_has_keys
 from users.user import User
 
-user_api = Blueprint('users_api', __name__, url_prefix='/api/user')
+user_api = Blueprint('users_api', __name__, url_prefix='/srvPy/api/user')
 
 
 @user_api.route('/reset_password', methods=['POST'])
