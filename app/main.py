@@ -18,7 +18,7 @@ app.register_blueprint(user_api)
 app.register_blueprint(photos_api)
 app.register_blueprint(admin_api)
 app.register_blueprint(test_api)
-
+app.register_blueprint(clinics_api)
 @app.route('/')
 def hello_world():
     return jsonify({'message': 'Welcome to the Hikma Health backend.',
