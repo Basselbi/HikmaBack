@@ -25,3 +25,13 @@ def get_most_common_clinic():
                 cur.execute(secondary)
                 result = cur.fetchone()
             return result[0]
+        
+def get_all_clinic():
+    primary = """
+    SELECT * FROM clinics ORDER BY id DESC;
+    """
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(primary)
+            result = cur.fetchone()
+            return result[0]
