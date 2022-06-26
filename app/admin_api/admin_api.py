@@ -58,11 +58,11 @@ def create_user():
     decrypter = cryptography_util.decrypt_passowrd(hashed_password) 
     print(decrypter)
     print("------------------------")
-    user = User(id, name_str, params['role'], params['email'], hashed_password)
-    # try:
-    #     add_user(user)
-    # except psycopg2.errors.UniqueViolation:
-    #     raise WebError('User already exists', 409)
+    user = User(id, name_str, params['role'], params['email'], str(hashed_password))
+    try:
+        add_user(user)
+    except psycopg2.errors.UniqueViolation:
+        raise WebError('User already exists', 409)
 
     #all_users = [User.from_db_row(r).to_dict() for r in all_user_data()]
     return jsonify({'users': "ok"})
