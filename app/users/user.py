@@ -30,6 +30,7 @@ class User:
         print(encryptedPass)
         print(user[0])
         a  = bytes(user[0], 'utf-8')
+        print(a)
         print(cryptography_util.decrypt_passowrd(a))
         print("******************")
         if str(encryptedPass) != str(user[0]):
