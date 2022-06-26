@@ -30,10 +30,11 @@ class User:
         print(encryptedPass)
         print(user[0])
         print("******************")
-        if str(encryptedPass) == user[0]:
+        if str(encryptedPass) != str(user[0]):
             raise WebError("password incorrect", status_code=401)
         else:
-            return False
+            print("yes")
+            return True
         #if not bcrypt.checkpw(encodePassword, user[0]):
             #raise WebError("password incorrect", status_code=401)
         #else:
