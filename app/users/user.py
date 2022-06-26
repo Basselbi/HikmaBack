@@ -29,7 +29,8 @@ class User:
         print("********deecdoded password +passowrd**********")
         print(encryptedPass)
         print(user[0])
-        print(cryptography_util.decrypt_passowrd(str((user[0]))))
+        a =bytes(user[0],'utf-8')
+        print(cryptography_util.decrypt_passowrd(a))
         print("******************")
         if str(encryptedPass) != str(user[0]):
             raise WebError("password incorrect", status_code=401)
