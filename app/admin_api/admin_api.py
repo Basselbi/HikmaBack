@@ -58,7 +58,7 @@ def create_user():
     decrypter = cryptography_util.decrypt_passowrd(hashed_password) 
     print(decrypter)
     print("------------------------")
-    user = User(id, name_str, params['role'], params['email'], str(hashed_password))
+    user = User(id, name_str, params['role'], params['email'], hashed_password)
     try:
         add_user(user)
     except psycopg2.errors.UniqueViolation:
