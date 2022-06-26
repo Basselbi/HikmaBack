@@ -25,15 +25,10 @@ class User:
     def authenticateWithoutLang(cls, email, password):
         print(email)
         user = db.user_password_by_email(email)
-        encryptedPass = cryptography_util.encrypt_passowrd(password)
-        print("********deecdoded password +passowrd**********")
-        print(encryptedPass)
-        print(user[0])
         a  = bytes(user[0], 'utf-8')
-        print(a)
-        print(cryptography_util.decrypt_passowrd(a))
+        decodePassword = cryptography_util.decrypt_passowrd(a)
         print("******************")
-        if str(encryptedPass) != str(user[0]):
+        if str(decodePassword) != str(password):
             raise WebError("password incorrect", status_code=401)
         else:
             print("yes")
