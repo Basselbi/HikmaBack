@@ -5,6 +5,7 @@ from user_api.user_api import user_api
 from photos.photos_api import photos_api
 from admin_api.admin_api import admin_api
 from test_api.test_api import test_api
+from clinics_api.clinics_api import clinics_api
 from web_errors import WebError
 from config import FLASK_DEBUG, FLASK_DEBUG_PORT
 import startup_tasks
