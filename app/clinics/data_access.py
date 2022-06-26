@@ -34,4 +34,5 @@ def get_all_clinic():
         with conn.cursor() as cur:
             cur.execute(primary)
             result = cur.fetchone()
-            return result[0]
+            print(result)
+            return result
