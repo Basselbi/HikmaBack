@@ -7,6 +7,6 @@ patient_api = Blueprint('patients_api', __name__, url_prefix='/api/patient')
 
 @patient_api.route('/get_patients', methods=['GET'])
 def sync():
-    patients = Patient.all_patient_data()
+    patients = Patient.get_all_patient()
     print(patients)
     return jsonify({'results': patients})

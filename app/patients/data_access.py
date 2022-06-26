@@ -71,6 +71,16 @@ def all_patient_data():
             cur.execute(query, [])
             yield from cur
 
+def get_all_patient():
+    primary = """
+    SELECT id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at FROM patients ORDER BY edited_at DESC LIMIT 25
+    """
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(primary)
+            result = cur.fetchone()
+            return result
+ 
 def search_patients(given_name: str, surname: str, country: str, hometown: str):
     where_clauses = []
     params = []
