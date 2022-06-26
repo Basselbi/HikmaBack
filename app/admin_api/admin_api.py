@@ -53,11 +53,7 @@ def create_user():
     #name_str = LanguageString(id=str(uuid.uuid4()), content_by_language={language: params['name']})
     name_str = params['name']
     hashed_password = cryptography_util.encrypt_passowrd(params['password']) 
-    print("------------------------")
-    print(hashed_password)
     decrypter = cryptography_util.decrypt_passowrd(hashed_password) 
-    print(decrypter)
-    print("------------------------")
     user = User(id, name_str, params['role'], params['email'], str(hashed_password).replace("b'", ""))
     try:
         add_user(user)
