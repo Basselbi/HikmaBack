@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from mobile_api.mobile_api import mobile_api
 from user_api.user_api import user_api
+from patient_api.patient_api import patient_api
 from photos.photos_api import photos_api
 from admin_api.admin_api import admin_api
 from test_api.test_api import test_api
@@ -19,6 +20,7 @@ app.register_blueprint(photos_api)
 app.register_blueprint(admin_api)
 app.register_blueprint(test_api)
 app.register_blueprint(clinics_api)
+app.register_blueprint(patient_api)
 @app.route('/')
 def hello_world():
     return jsonify({'message': 'Welcome to the Hikma Health backend.',
