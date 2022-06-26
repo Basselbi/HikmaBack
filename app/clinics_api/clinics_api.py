@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from web_util import assert_data_has_keys
-from clinics.clinic import Clinic
+import clinics.data_access as Clinic
 
 clinics_api = Blueprint('clinics_api', __name__, url_prefix='/api/clinics')
 
