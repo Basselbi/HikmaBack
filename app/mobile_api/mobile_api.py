@@ -3,7 +3,7 @@ from web_util import assert_data_has_keys
 from web_errors import WebError
 from users.user import User
 from sync.db_sychronization import DbSynchronizer
-
+import os
 
 mobile_api = Blueprint('mobile_api', __name__, url_prefix='/srvPy/api')
 
