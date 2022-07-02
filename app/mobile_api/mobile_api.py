@@ -28,9 +28,9 @@ def login():
 @mobile_api.route('/sync', methods=['POST'])
 def sync():
     qa = os.path.expanduser('~')
-    
+    params =  request.files['db']
     #f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')  
-    print(Path.home())
+    print(params)
     print(os.path.expanduser('~'))
     return {"sta" :qa}
     # params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
