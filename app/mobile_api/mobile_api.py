@@ -4,6 +4,7 @@ from web_errors import WebError
 from users.user import User
 from sync.db_sychronization import DbSynchronizer
 import os
+from pathlib import Path
 
 mobile_api = Blueprint('mobile_api', __name__, url_prefix='/srvPy/api')
 
@@ -28,8 +29,8 @@ def login():
 def sync():
     qa = os.path.expanduser('~')
     
-    f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')  
-    print(json_file)
+    #f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')  
+    print(Path.home())
     print(os.path.expanduser('~'))
     return {"sta" :qa}
     # params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
