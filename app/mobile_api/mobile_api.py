@@ -28,7 +28,7 @@ def login():
 def sync():
     qa = os.path.expanduser('~')
     
-    with open('C:/Users/BasselEl-Bizri/AppData/wtv.txt') as json_file:
+    f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')  
     print(json_file)
     print(os.path.expanduser('~'))
     return {"sta" :qa}
