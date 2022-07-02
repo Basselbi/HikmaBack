@@ -26,14 +26,18 @@ def login():
 
 @mobile_api.route('/sync', methods=['POST'])
 def sync():
-    params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
-    User.authenticate(params['email'], params['password'])
-    if 'db' not in request.files:
-        raise WebError('db must be provided', 400)
+    qa = os.path.expanduser('~')
+    print(os.path.expanduser('~'))
 
-    synchronizer = DbSynchronizer(request.files['db'])
-    if not synchronizer.prepare_sync():
-        raise WebError("Synchronization failed", 500)
+    return {"sta" :qa}
+    # params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
+    # User.authenticate(params['email'], params['password'])
+    # if 'db' not in request.files:
+    #     raise WebError('db must be provided', 400)
 
-    synchronizer.execute_server_side_sql()
-    return jsonify({'to_execute': synchronizer.get_client_sql()})
+    # synchronizer = DbSynchronizer(request.files['db'])
+    # if not synchronizer.prepare_sync():
+    #     raise WebError("Synchronization failed", 500)
+
+    # synchronizer.execute_server_side_sql()
+    # return jsonify({'to_execute': synchronizer.get_client_sql()})
