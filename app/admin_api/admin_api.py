@@ -20,7 +20,7 @@ admin_api = Blueprint('admin_api', __name__, url_prefix='/srvPy/admin_api')
 @admin_api.route('/exec', methods=['POST'])
 def insert_on_demand():
     params = assert_data_has_keys(request, {'qry', 'arr'})
-    qry = params['qry']
+    qry = params['qry'].replace("?","%s")
     arr = params['arr']
     print(qry)
     print(arr)
