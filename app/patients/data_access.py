@@ -78,10 +78,10 @@ def exec(qry: str , param : []):
             cur.execute(qry, param)
             
 def fetch_patient_data():
-    query = """ SELECT * FROM patients """
+    qry = """ SELECT * FROM patients """
     with get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute(qry, param)
+            cur.execute(qry, [])
             return curr
             
 def get_all_patient():
