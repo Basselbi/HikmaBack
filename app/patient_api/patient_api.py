@@ -13,8 +13,8 @@ def sync():
 
 @patient_api.route('/get_recent_patients', methods=['GET'])
 def recent_patient():
-    patients = Patient.get_recent_patients('2022-07-03T02:12:17.709Z')
-    #print(patients)
+    patients = Patient.fetch_patient_data()
+    print(patients)
     return jsonify({'results': patients})
 
  

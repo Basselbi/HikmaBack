@@ -76,7 +76,14 @@ def exec(qry: str , param : []):
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(qry, param)
-
+            
+def fetch_patient_data():
+    query = """ SELECT * FROM patients """
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(qry, param)
+            return curr
+            
 def get_all_patient():
     primary = """
     SELECT id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at FROM patients ORDER BY edited_at DESC LIMIT 25
