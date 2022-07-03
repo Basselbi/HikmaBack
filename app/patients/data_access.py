@@ -62,6 +62,7 @@ def patient_from_key_data(given_name: str, surname: str, country: str, sex: str)
                 return None
             return row[0]
 
+
 def all_patient_data():
     query = """
     SELECT id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at FROM patients ORDER BY edited_at DESC LIMIT 25
@@ -70,6 +71,7 @@ def all_patient_data():
         with conn.cursor() as cur:
             cur.execute(query, [])
             yield from cur
+
 
 def get_all_patient():
     primary = """
@@ -80,7 +82,19 @@ def get_all_patient():
             cur.execute(primary)
             result = cur.fetchone()
             return result
- 
+
+
+def get_recent_patients(last_seen: str):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute('SELECT * FROM patients P WHERE CAST(P.edited_at AS Datetime) >=; %s',
+                        [last_seen])
+            row = cur.fetchone()
+            if not row:
+                raise WebError("email not found", status_code=404)
+            return row
+
+
 def search_patients(given_name: str, surname: str, country: str, hometown: str):
     where_clauses = []
     params = []
@@ -108,6 +122,7 @@ def search_patients(given_name: str, surname: str, country: str, hometown: str):
             cur.execute(query, params)
             yield from cur
 
+
 def patient_from_id(patient_id):
     query = """
     SELECT given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at FROM patients WHERE id = %s
@@ -130,4 +145,3 @@ def patient_from_id(patient_id):
                 phone=phone,
                 edited_at=edited_at
             )
-
