@@ -87,11 +87,11 @@ def get_all_patient():
 def get_recent_patients(last_seen: str):
     with get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute('SELECT * FROM patients P WHERE CAST(P.edited_at AS Datetime) >= %s',
+            cur.execute('SELECT * FROM patients',
                         [last_seen])
             row = cur.fetchone()
             if not row:
-                raise WebError("email not found", status_code=404)
+                raise WebError("patients not found", status_code=404)
             return row
 
 
