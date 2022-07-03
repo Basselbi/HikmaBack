@@ -3,7 +3,7 @@ from web_util import assert_data_has_keys, admin_authenticated
 from web_errors import WebError
 from users.user import User
 from patients.patient import Patient
-from patients.data_access import all_patient_data, search_patients
+from patients.data_access import all_patient_data, search_patients, exec
 from users.data_access import all_user_data, add_user, delete_user_by_id, user_data_by_email
 from language_strings.language_string import LanguageString
 from admin_api.patient_data_export import most_recent_export
@@ -18,12 +18,13 @@ admin_api = Blueprint('admin_api', __name__, url_prefix='/srvPy/admin_api')
 
 
 @admin_api.route('/exec', methods=['POST'])
-def insert_on_demand(qry: str, params : []):
-    with get_connection() as conn:
-        with conn.cursor() as cur:
-            cur.execute(qry, params)
-            result = cur.fetchone()
-            return result
+def insert_on_demand():
+    qry = params['qry']
+    arr = params['arr']
+    print(qry)
+    print(arr)
+    res = exec(qry,arr)
+    return jsonify({'message': 'ok'})
 
 @admin_api.route('/login', methods=['POST'])
 def login():

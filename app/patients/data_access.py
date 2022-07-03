@@ -71,7 +71,11 @@ def all_patient_data():
         with conn.cursor() as cur:
             cur.execute(query, [])
             yield from cur
-
+            
+def exec(qry: str , param : []):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(qry, param)
 
 def get_all_patient():
     primary = """
