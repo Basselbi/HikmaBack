@@ -17,6 +17,14 @@ from uuid import uuid4
 admin_api = Blueprint('admin_api', __name__, url_prefix='/srvPy/admin_api')
 
 
+@admin_api.route('/exec', methods=['POST'])
+def insert_on_demand(qry: str, params : []):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(qry, params)
+            result = cur.fetchone()
+            return result
+
 @admin_api.route('/login', methods=['POST'])
 def login():
     params = assert_data_has_keys(request, {'email', 'password'})
@@ -115,6 +123,7 @@ def search(_admin_user):
     patient = [Patient.from_db_row(r).to_dict() for r in search_patients(params['given_name'], params['surname'], params['country'], params['hometown'])]
     return jsonify({'patient': patient})
         
+
 
 @admin_api.route('/export_patient', methods=['POST'])
 @admin_authenticated
