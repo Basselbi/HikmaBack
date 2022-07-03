@@ -89,10 +89,8 @@ def get_recent_patients(last_seen: str):
         with conn.cursor() as cur:
             cur.execute('SELECT * FROM patients',
                         [last_seen])
-            row = cur.fetchone()
-            if not row:
-                raise WebError("patients not found", status_code=404)
-            return row
+            result = cur.fetchone()
+            return result
 
 
 def search_patients(given_name: str, surname: str, country: str, hometown: str):
