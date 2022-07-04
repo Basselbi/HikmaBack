@@ -22,14 +22,26 @@ def all_instances():
 
 @mobile_api.route('/async', methods=['GET'])
 def fetch_all():
+    results = []
     patients = Patient.fetch_patient_data()
+    for row in patients:
+        results.append(row)
     visits = Visits.all_visits()
+    for row in visits:
+        results.append(row)
     events = Visits.all_events()
+    for row in events:
+        results.append(row)
     stringContent = Visits.all_string_content()
+    for row in stringContent:
+        results.append(row)
     stringIDS = Visits.all_string_ids()
-    results = patients + visits + events + stringContent + stringIDS 
+    for row in stringIDS:
+        results.append(row)    
+    #results = patients + visits + events + stringContent + stringIDS 
     return{"results": results}
 
+  
 
 @mobile_api.route('/login', methods=['POST'])
 def login():
