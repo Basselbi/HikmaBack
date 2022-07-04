@@ -82,7 +82,7 @@ def fetch_patient_data():
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(qry, [])
-            return curr
+            return cur
             
 def get_all_patient():
     primary = """
