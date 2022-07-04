@@ -2,6 +2,8 @@ from flask import Blueprint, request, jsonify
 from web_util import assert_data_has_keys
 from web_errors import WebError
 from users.user import User
+import patients.data_access as Patient
+import visits.data_access as Visits
 from sync.db_sychronization import DbSynchronizer
 import os
 from pathlib import Path
@@ -18,6 +20,21 @@ def all_instances():
     )
 
 
+@mobile_api.route('/async', methods=['GET'])
+def fetch_all():
+    patients = Patient.fetch_patient_data()
+    visits = Visits.all_visits()
+    events = Visits.all_events()
+    stringContent = Visits.all_string_content()
+    stringIDS = Visits.all_string_ids()
+    return{
+        {'patients': jsonify(patients)},
+        {'visits':  jsonify(visits)},
+        {'events':  jsonify(events)},
+        {'stringContent':  jsonify(stringContent)},
+        {'stringIDS':  jsonify(stringIDS)}}
+
+
 @mobile_api.route('/login', methods=['POST'])
 def login():
     params = assert_data_has_keys(request, {'email', 'password'})
@@ -29,10 +46,10 @@ def login():
 def sync():
     qa = os.path.expanduser('~')
     #params =  request.files['db']
-    #f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')  
-    #print(params)
+    #f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')
+    # print(params)
     print(os.path.expanduser('~'))
-    return {"sta" :qa}
+    return {"sta": qa}
     # params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
     # User.authenticate(params['email'], params['password'])
     # if 'db' not in request.files:
