@@ -26,7 +26,7 @@ def fetch_all():
     patients = Patient.fetch_patient_data()
     for row in patients:
         results.append(row)
-    visits = Visits.all_visits()
+    visits = Visits.all_visits_sync()
     for row in visits:
         results.append(row)
     events = Visits.all_events()

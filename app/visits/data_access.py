@@ -15,7 +15,7 @@ def add_visit(visit: Visit):
                          visit.check_in_timestamp,
                          visit.edited_at
                          ])
-def all_visits():
+def all_visits_sync():
     qry = """ SELECT * FROM visits WHERE deleted = %s ORDER BY check_in_timestamp DESC;"""
     arr = []
     with get_connection() as conn:
