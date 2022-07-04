@@ -79,10 +79,13 @@ def exec(qry: str , param : []):
             
 def fetch_patient_data():
     qry = """ SELECT * FROM patients """
+    arr = []
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(qry, [])
-            return cur
+            for row in cur:
+                arr.append("insert into t values (" + str(row) + ");");
+            return arr
             
 def get_all_patient():
     primary = """
