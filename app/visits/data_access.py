@@ -16,11 +16,11 @@ def add_visit(visit: Visit):
                          visit.edited_at
                          ])
 def all_visits():
-    qry = """ SELECT * FROM visits WHERE not deleted ORDER BY check_in_timestamp DESC;"""
+    qry = """ SELECT * FROM visits WHERE deleted = %s ORDER BY check_in_timestamp DESC;"""
     arr = []
     with get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute(qry, [])
+            cur.execute(qry, [0])
             for row in cur:
                 arr.append("insert into visits values (" + str(row) + ");");
             return arr
