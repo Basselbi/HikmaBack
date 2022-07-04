@@ -27,11 +27,11 @@ def fetch_all():
     events = Visits.all_events()
     stringContent = Visits.all_string_content()
     stringIDS = Visits.all_string_ids()
-    return{"patients": patients,
+    return jsonify({"patients": patients,
           'visits':  visits,
           'events':  events,
           'stringContent': stringContent,
-          'stringIDS':stringIDS}
+          'stringIDS':stringIDS})
 
 
 @mobile_api.route('/login', methods=['POST'])
