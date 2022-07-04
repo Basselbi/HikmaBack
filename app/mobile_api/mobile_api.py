@@ -27,7 +27,7 @@ def fetch_all():
     events = Visits.all_events()
     stringContent = Visits.all_string_content()
     stringIDS = Visits.all_string_ids()
-    return{ "ok":"true"}
+    return{ "patients": patients}
         # {'patients': jsonify(patients)},
         # {'visits':  jsonify(visits)},
         # {'events':  jsonify(events)},
