@@ -78,13 +78,13 @@ def exec(qry: str , param : []):
             cur.execute(qry, param)
             
 def fetch_patient_data():
-    qry = """ SELECT * FROM patients """
+    qry = """ SELECT id, given_name, surname, date_of_birth, country, hometown, phone, sex, edited_at, deleted FROM patients """
     arr = []
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute(qry, [])
             for row in cur:
-                arr.append("insert into patients values " + str(row) + ";");
+                arr.append("insert into patients ( id, given_name, surname, date_of_birth, country, hometown, phone, sex, edited_at, deleted) values " + str(row) + ";");
             return arr
             
 def get_all_patient():
