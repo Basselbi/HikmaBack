@@ -85,7 +85,6 @@ def fetch_patient_data():
             cur.execute(qry, [])
             for row in cur:
                 arr.append("insert into patients values " + str(row) + ";");
-                print(("insert into patients values " + str(row) + ";"))
             return arr
             
 def get_all_patient():

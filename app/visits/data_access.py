@@ -22,7 +22,7 @@ def all_visits_sync():
         with conn.cursor() as cur:
             cur.execute(qry, [0])
             for row in cur:
-                arr.append("insert into visits values (" + str(row) + ");");
+                arr.append("insert into visits values " + str(row) + ";");
             return arr
 
 def all_string_content():
@@ -32,7 +32,7 @@ def all_string_content():
         with conn.cursor() as cur:
             cur.execute(qry, [])
             for row in cur:
-                arr.append("insert into string_content values (" + str(row) + ");");
+                arr.append("insert into string_content values " + str(row) + ";");
             return arr     
         
 def all_string_ids():
@@ -42,7 +42,7 @@ def all_string_ids():
         with conn.cursor() as cur:
             cur.execute(qry, [])
             for row in cur:
-                arr.append("insert into string_ids values (" + str(row) + ");");
+                arr.append("insert into string_ids values " + str(row) + ";");
             return arr
 
 def all_events():
@@ -52,7 +52,7 @@ def all_events():
         with conn.cursor() as cur:
             cur.execute(qry, [])
             for row in cur:
-                arr.append("insert into events values (" + str(row) + ");");
+                arr.append("insert into events values " + str(row) + ";");
             return arr             
 def first_visit_by_patient_and_date(patient_id: str, date: datetime.date) -> Tuple[Optional[str], Optional[str]]:
     query = "SELECT id, check_in_timestamp FROM visits WHERE patient_id = %s AND date(check_in_timestamp) = %s;"
