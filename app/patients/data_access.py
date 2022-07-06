@@ -84,7 +84,7 @@ def fetch_patient_data():
         with conn.cursor() as cur:
             cur.execute(qry, [])
             for row in cur:
-                arr.append("insert into patients values (" + str(row) + ");");
+                arr.append("insert into patients values " + str(row) + ";");
             return arr
             
 def get_all_patient():
