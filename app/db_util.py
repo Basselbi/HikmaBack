@@ -4,7 +4,7 @@ import psycopg2
 unix_socket = '/cloudsql/{}'.format("erad-baad7:us-east1:hikma-db")
 
 def get_connection():
-    return psycopg2.connect(host=unix_socket, database='hikmadb-dev', user='hikma_dev', password='ukCVF/Rvyd/x$y4A')
+    #return psycopg2.connect(host=unix_socket, database='hikmadb-dev', user='hikma_dev', password='ukCVF/Rvyd/x$y4A')
     return psycopg2.connect(host='34.138.174.216', database='hikmadb-dev', user='postgres', password='Bassel90')
 
 
