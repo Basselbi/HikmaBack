@@ -53,7 +53,7 @@ Set EXPORTS_STORAGE_BUCKET to hikma-api-exports (to be created)
 
 **Create Key Ring/ Service Account, and Key:**
 ----------------------------------------------
-GCP left nav> Security > Cryptographic Keys > Create Key Ring and Key
+GCP left nav> Security > graphic Keys > Create Key Ring and Key
 IAM > Service accounts > Create Service Account > “hikma-app-service-account” (or whatever you want to call it) > Create> Give it the Cloud SQL Admin Role > Continue
 In Service accounts list, on hikma-app-service-account, click actions, create key (JSON)
 Json key will download
