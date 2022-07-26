@@ -8,7 +8,7 @@ from users.data_access import all_user_data, add_user, delete_user_by_id, user_d
 from language_strings.language_string import LanguageString
 from admin_api.patient_data_export import most_recent_export
 from admin_api.single_patient_data_export import single_patient_export
-import cryptography_util
+import graphy_util
 import uuid
 import bcrypt
 import psycopg2.errors
@@ -62,8 +62,8 @@ def create_user():
     #language = params.get('language', 'en')
     #name_str = LanguageString(id=str(uuid.uuid4()), content_by_language={language: params['name']})
     name_str = params['name']
-    hashed_password = cryptography_util.encrypt_passowrd(params['password']) 
-    decrypter = cryptography_util.decrypt_passowrd(hashed_password) 
+    hashed_password = graphy_util.encrypt_passowrd(params['password']) 
+    decrypter = graphy_util.decrypt_passowrd(hashed_password) 
     user = User(id, name_str, params['role'], params['email'], str(hashed_password).replace("b'", ""))
     try:
         add_user(user)

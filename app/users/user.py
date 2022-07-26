@@ -3,7 +3,7 @@ from web_errors import WebError
 from language_strings.language_string import LanguageString
 import bcrypt
 import bcrypt
-import cryptography_util
+import graphy_util
 
 class User:
     def __init__(self, id, name, role, email, hashed_password):
@@ -25,7 +25,7 @@ class User:
     def authenticateWithoutLang(cls, email, password):
         user = db.user_password_by_email(email)
         a  = bytes(user[0], 'utf-8')
-        decodePassword = cryptography_util.decrypt_passowrd(a)
+        decodePassword = graphy_util.decrypt_passowrd(a)
         if str(decodePassword) != str(password):
             raise WebError("password incorrect", status_code=401)
         else:
