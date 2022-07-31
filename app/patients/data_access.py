@@ -15,14 +15,14 @@ def add_patient(patient: Patient):
                         ON CONFLICT (id)
                         DO UPDATE SET (id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at) values (%s,%s,%s, %s, %s, %s, %s,%s, %s, %s, %s)''',
                         [patient.id,
-                         to_id(patient.given_name),
-                         to_id(patient.surname),
-                         patient.date_of_birth,
-                         patient.sex,
-                         to_id(patient.country),
-                         to_id(patient.hometown),
-                         patient.phone,
-                         patient.edited_at
+                        patient.given_name,
+                        patient.surname,
+                        patient.date_of_birth,
+                        patient.sex,
+                        patient.country,
+                        patient.hometown,
+                        patient.phone,
+                        patient.edited_at
                          ])
 
 
