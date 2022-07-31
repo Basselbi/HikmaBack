@@ -73,14 +73,14 @@ def sync():
     connection = sqlite3.connect("sql3_hk_tmp.db")
     cursor = connection.cursor()
     for qrySql in sqlArr:
-        print(qrySql)
+        #print(qrySql)
         cursor.execute(qrySql)
     # connection 
     connection.commit() 
     connection.close()        
-    rows = cursor.execute("SELECT * from patients ").fetchall()
+    #rows = cursor.execute("SELECT * from patients ").fetchall()
     print(len(sqlArr))
-    print(rows)
+    #print(rows)
     file = None
     with open('sql3_hk_tmp.db', 'rb') as fp:
         file = FileStorage(fp)
