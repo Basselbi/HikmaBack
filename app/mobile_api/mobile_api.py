@@ -75,7 +75,7 @@ def sync():
          
     rows = cursor.execute("SELECT * from patients ").fetchall()
     print(len(sqlArr))
-    #synchronizer = DbSynchronizer(request.files['db'])
+    synchronizer = DbSynchronizer(sql3_hk_tmp.db)
     return {"sta": qa}
     # if not synchronizer.prepare_sync():
     #     raise WebError("Synchronization failed", 500)
