@@ -3,6 +3,7 @@ from web_util import assert_data_has_keys
 #from patients.patient import Patient
 import patients.data_access as Patient
 from datetime import datetime, date
+from patients.patient import Patient as pt
 
 patient_api = Blueprint('patients_api', __name__, url_prefix='/srvPy/api/patient')
 
@@ -32,7 +33,7 @@ def add_patient():
     hometown = params['hometown']
     phone = params['phone']
    
-    patient = Patient(
+    patient = pt(
         id=str(id),
         edited_at=datetime.now(),
         given_name=given_name_ls,
