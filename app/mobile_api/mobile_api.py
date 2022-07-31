@@ -80,7 +80,8 @@ def sync():
     file = None
     with open('sql3_hk_tmp.db', 'rb') as fp:
         file = FileStorage(fp)
-    synchronizer = DbSynchronizer(file)
+        synchronizer = DbSynchronizer(file)
+     
     return {"sta": qa}
     # if not synchronizer.prepare_sync():
     #     raise WebError("Synchronization failed", 500)
