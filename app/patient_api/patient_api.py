@@ -22,25 +22,26 @@ def recent_patient():
 def add_patient():
     params = assert_data_has_keys(request, {'id', 'given_name', 'surname', 'date_of_birth', 'sex', 'country', 'hometown', 'phone'})
     id    = params['id']
-    given_name    = params['given_name']
-    surname    = params['surname']
+    given_name_ls    = params['given_name']
+    surname_ls   = params['surname']
     date_of_birth = params['date_of_birth']
     sex = params['sex']
     country = params['country']
     hometown = params['hometown']
     phone = params['phone']
-    print(params)
-    # patient = Patient(
-    #     id=str(uuid.uuid4()),
-    #     edited_at=datetime.now(),
-    #     given_name=given_name_ls,
-    #     surname=surname_ls,
-    #     date_of_birth=date(2000, 10, 31),
-    #     sex=sex,
-    #     country=LanguageString(id=str(uuid.uuid4()), content_by_language={'en': 'Syria'}),
-    #     hometown=LanguageString(id=str(uuid.uuid4()), content_by_language={'en': 'Damascus'}),
-    #     phone=None
-    # )    
-    #patients = Patient.add_patient()
+   
+    patient = Patient(
+        id=str(id),
+        edited_at=datetime.now(),
+        given_name=given_name_ls,
+        surname=surname_ls,
+        date_of_birth=date(2000, 10, 31),
+        sex=sex,
+        country=country,
+        hometown=hometown,
+        phone=phone 
+    )    
+    print(patient)
+    #atients = Patient.add_patient()
     #print(patients)
-    return jsonify(params)
+    return jsonify(patient)
