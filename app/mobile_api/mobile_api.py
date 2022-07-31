@@ -69,7 +69,7 @@ def sync():
     #     raise WebError('db must be provided', 400)
     if os.path.exists("sql3_hk_tmp.db"):
        os.remove("sql3_hk_tmp.db")
-       prnt('Hk Tmp Removed')
+       print('Hk Tmp Removed')
     connection = sqlite3.connect("sql3_hk_tmp.db")
     cursor = connection.cursor()
     for qrySql in sqlArr:
