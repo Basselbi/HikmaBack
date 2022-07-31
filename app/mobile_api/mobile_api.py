@@ -69,7 +69,9 @@ def sync():
        os.remove("sql3_hk_tmp.db")
     connection = sqlite3.connect("sql3_hk_tmp.db")
     cursor = connection.cursor()
-    rows = cursor.execute("SELECT name, species, tank_number FROM fish").fetchall()
+    for qrySql in sqlArr:
+        cursor.execute(qrySql)
+    rows = cursor.execute("SELECT * from patiens ").fetchall()
     print(len(sqlArr))
     #synchronizer = DbSynchronizer(request.files['db'])
     return {"sta": qa}
