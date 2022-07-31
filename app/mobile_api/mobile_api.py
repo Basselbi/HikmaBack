@@ -8,6 +8,8 @@ from sync.db_sychronization import DbSynchronizer
 import os
 from pathlib import Path
 import sqlite3
+from werkzeug.datastructures import FileStorage
+
 mobile_api = Blueprint('mobile_api', __name__, url_prefix='/srvPy/api')
 
 
@@ -75,7 +77,10 @@ def sync():
          
     rows = cursor.execute("SELECT * from patients ").fetchall()
     print(len(sqlArr))
-    synchronizer = DbSynchronizer(sql3_hk_tmp.db)
+    file = None
+    with open('sql3_hk_tmp.db', 'rb') as fp:
+        file = FileStorage(fp)
+    synchronizer = DbSynchronizer(file)
     return {"sta": qa}
     # if not synchronizer.prepare_sync():
     #     raise WebError("Synchronization failed", 500)
