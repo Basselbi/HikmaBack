@@ -4,6 +4,7 @@ from web_util import assert_data_has_keys
 import patients.data_access as Patient
 from datetime import datetime, date
 from patients.patient import Patient as pt
+import sqlite3
 
 patient_api = Blueprint('patients_api', __name__, url_prefix='/srvPy/api/patient')
 
@@ -45,6 +46,12 @@ def add_patient():
         phone=phone 
     )    
     print(patient)
-    Patient.add_patient(patient)
+    connection = sqlite3.connect("aquarium.db")
+    cursor = connection.cursor()
+    cursor.execute("CREATE TABLE fish (name TEXT, species TEXT, tank_number INTEGER)")
+    cursor.execute("INSERT INTO fish VALUES ('Sammy', 'shark', 1)")
+    cursor.execute("INSERT INTO fish VALUES ('Jamie', 'cuttlefish', 7)")
+    rows = cursor.execute("SELECT name, species, tank_number FROM fish").fetchall()
+    print(rows)
     #print(patients)
     return jsonify(patient)
