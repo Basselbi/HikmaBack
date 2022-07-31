@@ -59,8 +59,8 @@ def sync():
     print(os.path.expanduser('~'))
     params = assert_data_has_keys(request, {'sql'})
     sql = params['sql']
-    #sqlArr = str(sql).split(';')
-    print(str(sql))
+    sqlArr = sql.split(';')
+    print(sqlArr)
     # params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
     # User.authenticate(params['email'], params['password'])
     # if 'db' not in request.files:
