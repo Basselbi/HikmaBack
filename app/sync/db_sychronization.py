@@ -137,6 +137,8 @@ class DbSynchronizer:
     def _get_client_table_rows(self, object_type: ClientObject, ids: List[str]):
         cur = self.client_conn.cursor()
         table_name = object_type.table_name()
+        print("--------------")
+        print(table_name)
         columns, constructors = zip(*object_type.db_columns_from_client())
         column_select_str = ', '.join(columns)
 
