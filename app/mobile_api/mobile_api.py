@@ -70,8 +70,9 @@ def sync():
     connection = sqlite3.connect("sql3_hk_tmp.db")
     cursor = connection.cursor()
     for qrySql in sqlArr:
-        cursor.execute(qrySql)
         print(qrySql)
+        cursor.execute(qrySql)
+         
     rows = cursor.execute("SELECT * from patients ").fetchall()
     print(len(sqlArr))
     #synchronizer = DbSynchronizer(request.files['db'])
