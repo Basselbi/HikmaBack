@@ -45,6 +45,6 @@ def add_patient():
         phone=phone 
     )    
     print(patient)
-    #atients = Patient.add_patient()
+    Patient.add_patient()
     #print(patients)
     return jsonify(patient)
