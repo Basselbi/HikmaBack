@@ -54,6 +54,7 @@ def get_all_users(_admin_user):
 @admin_api.route('/user', methods=['POST'])
 #@admin_authenticated
 def create_user():
+    print("ev")
     params = assert_data_has_keys(request, {'email', 'password', 'name', 'role'})
     if params['role'] not in ['admin', 'provider']:
         raise WebError('Role must be either "admin" or "provider"', 400)
