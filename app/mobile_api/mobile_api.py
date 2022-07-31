@@ -65,8 +65,9 @@ def sync():
     # User.authenticate(params['email'], params['password'])
     # if 'db' not in request.files:
     #     raise WebError('db must be provided', 400)
-    os.remove("sql3_hikma_tmp.db")
-    connection = sqlite3.connect("sql3_hikma_tmp.db")
+    if os.path.exists("sql3_hk_tmp.db"):
+       os.remove("sql3_hk_tmp.db")
+    connection = sqlite3.connect("sql3_hk_tmp.db")
     cursor = connection.cursor()
     rows = cursor.execute("SELECT name, species, tank_number FROM fish").fetchall()
     print(len(sqlArr))
