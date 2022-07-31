@@ -18,3 +18,22 @@ def recent_patient():
     return jsonify({'results': patients})
 
  
+@patient_api.route('/add_patient', methods=['GET'])
+def add_patient():
+    params = assert_data_has_keys(request, {'id', 'name'})
+    pat    = params['id']
+    print(pat)
+    # patient = Patient(
+    #     id=str(uuid.uuid4()),
+    #     edited_at=datetime.now(),
+    #     given_name=given_name_ls,
+    #     surname=surname_ls,
+    #     date_of_birth=date(2000, 10, 31),
+    #     sex=sex,
+    #     country=LanguageString(id=str(uuid.uuid4()), content_by_language={'en': 'Syria'}),
+    #     hometown=LanguageString(id=str(uuid.uuid4()), content_by_language={'en': 'Damascus'}),
+    #     phone=None
+    # )    
+    #patients = Patient.add_patient()
+    #print(patients)
+    return jsonify(params)
