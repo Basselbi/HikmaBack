@@ -35,10 +35,10 @@ def add_patient():
    
     patient = pt(
         id=str(id),
-        edited_at=datetime.now(),
+        edited_at=datetime.now().isoformat(),
         given_name=given_name_ls,
         surname=surname_ls,
-        date_of_birth=date(2000, 10, 31),
+        date_of_birth=date(2000, 10, 31).isoformat(),
         sex=sex,
         country=country,
         hometown=hometown,
