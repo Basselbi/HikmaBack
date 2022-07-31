@@ -43,6 +43,7 @@ class DbSynchronizer:
     def _prepare_table_sync(self, object_type):
         table_name = object_type.table_name()
         server_ids = get_ids_and_edit_timestamps(table_name)
+        print("alloo")
         client_ids = self._get_client_ids_and_edit_timestamps(table_name)
 
         to_add_to_server = []
