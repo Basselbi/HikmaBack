@@ -32,13 +32,13 @@ def add_patient():
     country = params['country']
     hometown = params['hometown']
     phone = params['phone']
-   
+   #date(2000, 10, 31).isoformat(),
     patient = pt(
         id=str(id),
         edited_at=datetime.now().isoformat(),
         given_name=given_name_ls,
         surname=surname_ls,
-        date_of_birth=date(2000, 10, 31).isoformat(),
+        date_of_birth='03-54-21',
         sex=sex,
         country=country,
         hometown=hometown,
