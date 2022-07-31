@@ -18,7 +18,7 @@ def recent_patient():
     return jsonify({'results': patients})
 
  
-@patient_api.route('/add_patient', methods=['GET'])
+@patient_api.route('/add_patient', methods=['POST'])
 def add_patient():
     params = assert_data_has_keys(request, {'id', 'name'})
     pat    = params['id']
