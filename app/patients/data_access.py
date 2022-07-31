@@ -5,10 +5,10 @@ from language_strings.language_string import to_id, LanguageString
 
 
 def add_patient(patient: Patient):
-    update_language_string(patient.given_name)
-    update_language_string(patient.surname)
-    update_language_string(patient.country)
-    update_language_string(patient.hometown)
+    # update_language_string(patient.given_name)
+    # update_language_string(patient.surname)
+    # update_language_string(patient.country)
+    # update_language_string(patient.hometown)
     with get_connection() as conn:
         with conn.cursor() as cur:
             cur.execute('''INSERT INTO patients (id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
