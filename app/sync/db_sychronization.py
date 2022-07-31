@@ -23,7 +23,7 @@ class DbSynchronizer:
         self.server_sql = []
         self.client_sql = []
 
-        self._prepare_table_sync(IndividualLanguageString)
+        #self._prepare_table_sync(IndividualLanguageString)
         self._prepare_table_sync(Clinic)
         self._prepare_table_sync(Patient)
         self._prepare_table_sync(Visit)
