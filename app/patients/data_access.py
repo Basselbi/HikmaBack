@@ -13,7 +13,7 @@ def add_patient(patient: Patient):
         with conn.cursor() as cur:
             cur.execute('''INSERT INTO patients (id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                         ON CONFLICT (id)
-                        DO UPDATE SET (id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at) values (%s,%s,%s, %s, %s, %s, %s,%s, %s, %s, %s)''',
+                        DO UPDATE SET (id, given_name, surname, date_of_birth, sex, country, hometown, phone, edited_at) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)''',
                         [patient.id,
                         patient.given_name,
                         patient.surname,
