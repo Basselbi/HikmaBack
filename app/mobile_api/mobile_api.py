@@ -60,7 +60,7 @@ def sync():
     params = assert_data_has_keys(request, {'sql'})
     sql = params['sql']
     sqlArr = sql.split(';')
-    print(sqlArr)
+    #print(sqlArr)
     # params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
     # User.authenticate(params['email'], params['password'])
     # if 'db' not in request.files:
@@ -71,7 +71,8 @@ def sync():
     cursor = connection.cursor()
     for qrySql in sqlArr:
         cursor.execute(qrySql)
-    rows = cursor.execute("SELECT * from patiens ").fetchall()
+        print(qrySql)
+    rows = cursor.execute("SELECT * from patients ").fetchall()
     print(len(sqlArr))
     #synchronizer = DbSynchronizer(request.files['db'])
     return {"sta": qa}
