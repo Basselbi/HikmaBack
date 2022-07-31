@@ -141,8 +141,9 @@ class DbSynchronizer:
         print(table_name)
         columns, constructors = zip(*object_type.db_columns_from_client())
         column_select_str = ', '.join(columns)
-
+        print("--aaaaa--")
         for id in ids:
+            print(id)
             cur.execute(f'SELECT {column_select_str} FROM {table_name} WHERE id = ?', [id])
             row = cur.fetchone()
             if row:
