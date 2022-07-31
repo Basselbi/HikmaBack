@@ -7,7 +7,7 @@ import visits.data_access as Visits
 from sync.db_sychronization import DbSynchronizer
 import os
 from pathlib import Path
-
+import sqlite3
 mobile_api = Blueprint('mobile_api', __name__, url_prefix='/srvPy/api')
 
 
@@ -57,13 +57,17 @@ def sync():
     #f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')
     # print(params)
     print(os.path.expanduser('~'))
-    return {"sta": qa}
+     
     # params = assert_data_has_keys(request, {'email', 'password'}, data_type='form')
     # User.authenticate(params['email'], params['password'])
     # if 'db' not in request.files:
     #     raise WebError('db must be provided', 400)
-
-    # synchronizer = DbSynchronizer(request.files['db'])
+    connection = sqlite3.connect("aquarium.db")
+    cursor = connection.cursor()
+    rows = cursor.execute("SELECT name, species, tank_number FROM fish").fetchall()
+    print(rows)
+    #synchronizer = DbSynchronizer(request.files['db'])
+    return {"sta": qa}
     # if not synchronizer.prepare_sync():
     #     raise WebError("Synchronization failed", 500)
 
