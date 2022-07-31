@@ -12,6 +12,7 @@ class Clinic(ClientObject):
     edited_at: datetime
 
     def client_insert_values(self):
+        print(self)
         return [self.id, self.name.id.replace('-', ''), self.format_ts(self.edited_at)]
 
     @classmethod
