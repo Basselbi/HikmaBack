@@ -20,9 +20,16 @@ def recent_patient():
  
 @patient_api.route('/add_patient', methods=['POST'])
 def add_patient():
-    params = assert_data_has_keys(request, {'id', 'name'})
-    pat    = params['id']
-    print(pat)
+    params = assert_data_has_keys(request, {'id', 'given_name', 'surname', 'date_of_birth', 'sex', 'country', 'hometown', 'phone'})
+    id    = params['id']
+    given_name    = params['given_name']
+    surname    = params['surname']
+    date_of_birth = params['date_of_birth']
+    sex = params['sex']
+    country = params['country']
+    hometown = params['hometown']
+    phone = params['phone']
+    print(params)
     # patient = Patient(
     #     id=str(uuid.uuid4()),
     #     edited_at=datetime.now(),
