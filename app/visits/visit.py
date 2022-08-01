@@ -14,6 +14,8 @@ class Visit(ClientObject):
     deleted: bool
 
     def client_insert_values(self):
+        print("slaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        print(self)
         return [self.id,
                 self.patient_id,
                 self.clinic_id,
