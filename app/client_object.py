@@ -57,6 +57,8 @@ class ClientObject:
 
     @staticmethod
     def format_ts(dt: datetime):
+        print("easss")
+        print(dt)
         return dt.astimezone(timezone.utc).isoformat().replace('+00:00', 'Z')
 
     @staticmethod
