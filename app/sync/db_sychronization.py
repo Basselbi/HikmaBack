@@ -12,6 +12,7 @@ import itertools
 from util import parse_client_timestamp
 from typing import List
 from datetime import datetime
+import pytz
 
 
 class DbSynchronizer:
@@ -55,10 +56,11 @@ class DbSynchronizer:
         print("***********************")
         print(client_ids.items())
         for id, ts in client_ids.items():
-            nai =  datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=None)
+            #nai =  datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=None)
+            now_aware = pytz.utc.localize(datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ"))
             if id not in server_ids:
                 to_add_to_server.append(id)
-            elif ts > nai:
+            elif ts > now_aware:
                 to_update_on_server.append(id)
             else:
                 to_update_on_client.append(id)
