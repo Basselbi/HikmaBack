@@ -11,6 +11,7 @@ import sqlite3
 import itertools
 from util import parse_client_timestamp
 from typing import List
+from datetime import datetime
 
 
 class DbSynchronizer:
