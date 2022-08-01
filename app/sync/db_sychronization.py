@@ -56,7 +56,7 @@ class DbSynchronizer:
         for id, ts in client_ids.items():
             if id not in server_ids:
                 to_add_to_server.append(id)
-            elif ts >  datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ"):
+            elif ts >  datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=None):
                 to_update_on_server.append(id)
             else:
                 to_update_on_client.append(id)
