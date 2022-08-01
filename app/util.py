@@ -6,7 +6,7 @@ def identity(x):
 
 
 def parse_client_timestamp(ts: str):
-    for fmt in ('%Y-%m-%dT%H:%M:%S%fZ', '%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%d'):
+    for fmt in ('%Y-%m-%dT%H:%M:%S.%fZ', '%Y-%m-%dT%H:%M:%SZ', '%Y-%m-%d'):
         try:
             return datetime.strptime(ts, fmt).replace(tzinfo=timezone.utc)
         except ValueError:
