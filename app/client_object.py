@@ -58,7 +58,7 @@ class ClientObject:
     @staticmethod
     def format_ts(dt: datetime):
         #datetime.datetime.strptime(dt, "%Y-%m-%dT%H:%M:%S.%fZ")
-        return  datetime.strptime(dt, "%Y-%m-%dT%H:%M.%fZ")
+        return  datetime.strptime(dt, "%Y-%m-%dT%H:%M:%S%fZ")
 
     @staticmethod
     def format_string(s: LanguageString):
