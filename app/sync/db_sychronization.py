@@ -52,7 +52,8 @@ class DbSynchronizer:
         to_add_to_client = []
         to_update_on_server = []
         to_update_on_client = []
-        print(len(client_ids.items()))
+        print("***********************")
+        print(client_ids.items())
         for id, ts in client_ids.items():
             nai =  datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=None)
             if id not in server_ids:
