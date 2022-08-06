@@ -11,7 +11,7 @@ import sqlite3
 import itertools
 from util import parse_client_timestamp
 from typing import List
-from datetime import datetime
+from datetime import datetime,timedelta
 import pytz
 
 
@@ -25,7 +25,7 @@ class DbSynchronizer:
         self.server_sql = []
         self.client_sql = []
 
-        #self._prepare_table_sync(IndividualLanguageString)
+        self._prepare_table_sync(IndividualLanguageString)
         self._prepare_table_sync(Clinic)
         self._prepare_table_sync(Patient)
         self._prepare_table_sync(Visit)
@@ -45,19 +45,21 @@ class DbSynchronizer:
     def _prepare_table_sync(self, object_type):
         table_name = object_type.table_name()
         server_ids = get_ids_and_edit_timestamps(table_name)
-        print("server_ids")
-        print(server_ids)
+        #print("server_ids")
+        #print(server_ids)
         client_ids = self._get_client_ids_and_edit_timestamps(table_name)
-
+        today = datetime.today()
         to_add_to_server = []
         to_add_to_client = []
         to_update_on_server = []
         to_update_on_client = []
-        print("***********************")
-        print(client_ids.items())
+        #print("***********************")
+        #print(client_ids.items())
         for id, ts in client_ids.items():
             #nai =  datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=None)
-            now_aware = pytz.utc.localize(datetime.strptime(server_ids[id], "%Y-%m-%dT%H:%M:%S.%fZ"))
+            
+            if id in server_ids:
+                now_aware = pytz.utc.localize(datetime.strptime(server_ids[id],"%Y-%m-%dT%H:%M:%SZ"))
             if id not in server_ids:
                 to_add_to_server.append(id)
             elif ts > now_aware:
@@ -143,13 +145,9 @@ class DbSynchronizer:
     def _get_client_table_rows(self, object_type: ClientObject, ids: List[str]):
         cur = self.client_conn.cursor()
         table_name = object_type.table_name()
-        print("--------------")
-        print(table_name)
         columns, constructors = zip(*object_type.db_columns_from_client())
         column_select_str = ', '.join(columns)
-        print("--aaaaa--")
         for id in ids:
-            print(id)
             cur.execute(f'SELECT {column_select_str} FROM {table_name} WHERE id = ?', [id])
             row = cur.fetchone()
             if row:
@@ -160,5 +158,6 @@ class DbSynchronizer:
     def _write_client_db_to_tempfile(client_db_file: FileStorage):
         handle = NamedTemporaryFile('wb', delete=False, suffix='.db')
         client_db_file.save(handle)
+        print("fileClosed")
         handle.close()
         return handle.name

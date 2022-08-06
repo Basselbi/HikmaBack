@@ -79,7 +79,7 @@ def sync():
     connection.commit() 
     connection.close()        
     #rows = cursor.execute("SELECT * from patients ").fetchall()
-    print(len(sqlArr))
+    #print(len(sqlArr))
     #print(rows)
     file = None
     with open('sql3_hk_tmp.db', 'rb') as fp:
