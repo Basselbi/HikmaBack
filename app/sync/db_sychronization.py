@@ -11,7 +11,7 @@ import sqlite3
 import itertools
 from util import parse_client_timestamp
 from typing import List
-from datetime import datetime,timedelta
+from datetime import date, datetime,timedelta
 import pytz
 
 
@@ -20,11 +20,28 @@ class DbSynchronizer:
         self.client_db_filename = self._write_client_db_to_tempfile(client_db_file)
         self.client_conn = sqlite3.connect(self.client_db_filename)
         self._test_client_db()
+        
+    def adjust_dates(self,table_name):
+        stuff_ids = self._get_client_ids_and_edit_timestamps(table_name)
+        for id, ts in stuff_ids.items():
+            tmp = stuff_ids[id]
+            if type(tmp) == datetime:
+                str_date = tmp.strftime("%Y-%m-%dT%H:%M:%SZ")
+                self.updater_date(table_name,str_date,id)
+            #test = datetime.strptime(tmp,"%Y-%m-%dT%H:%M:%SZ")
+            #print(test)
+        #withoutZero =  server_ids[id].replace("+00", "Z")
+        #withoutSpace = withoutZero.replace("+00", "Z")
+    def execute_server_date_update_sql(self):
+        self.adjust_dates("string_content")
 
+    def updater_date(self,table_select_str,edited_at,id):
+         cur = self.client_conn.cursor()
+         cur.execute(f'UPDATE {table_select_str} SET edited_at= ? WHERE id = ?', [edited_at,id]) 
+            
     def prepare_sync(self):
         self.server_sql = []
-        self.client_sql = []
-
+        self.client_sql = [] 
         self._prepare_table_sync(IndividualLanguageString)
         self._prepare_table_sync(Clinic)
         self._prepare_table_sync(Patient)

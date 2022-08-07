@@ -4,6 +4,7 @@ from web_errors import WebError
 from users.user import User
 import patients.data_access as Patient
 import visits.data_access as Visits
+import sync.data_access as Synx
 from sync.db_sychronization import DbSynchronizer
 import os
 from pathlib import Path
@@ -51,9 +52,25 @@ def login():
     user = User.authenticate(params['email'], params['password'])
     return jsonify(user.to_dict())
 
+@mobile_api.route('/as', methods=['POST'])
+def update_edited_at(table_name):
+    server_ids = Synx.get_string_ids_and_edit_timestamps_only(table_name)
+    for id, ts in server_ids:
+        if "+00" in ts:
+            withoutZero = ts.replace("+00", "Z")
+            withoutSpace = withoutZero.replace(" ", "T")
+            Synx.update_ts(id,withoutSpace,table_name)
 
+    #withoutZero =  server_ids[id].replace("+00", "Z")
+    #withoutSpace = withoutZero.replace("+00", "Z")
+    return jsonify({'to_execute': "synchronizer.get_client_sql()"})
 @mobile_api.route('/sync', methods=['POST'])
 def sync():
+    update_edited_at("clinics")
+    update_edited_at("events")
+    update_edited_at("patients")
+    update_edited_at("string_content")
+    update_edited_at("visits")
     qa = os.path.expanduser('~')
     #params =  request.files['db']
     #f =  open('C:/Users/BasselEl-Bizri/AppData/wtv.txt','r')
@@ -67,13 +84,13 @@ def sync():
     # User.authenticate(params['email'], params['password'])
     # if 'db' not in request.files:
     #     raise WebError('db must be provided', 400)
-    if os.path.exists("sql3_hk_tmp.db"):
-       os.remove("sql3_hk_tmp.db")
+    if os.path.exists("/tmp/sql3_hk_tmp.db"):
+       os.remove("/tmp/sql3_hk_tmp.db")
        print('Hk Tmp Removed')
-    connection = sqlite3.connect("sql3_hk_tmp.db")
+    connection = sqlite3.connect("/tmp/sql3_hk_tmp.db")
     cursor = connection.cursor()
     for qrySql in sqlArr:
-        #print(qrySql)
+        print(qrySql)
         cursor.execute(qrySql)
     # connection 
     connection.commit() 
@@ -82,7 +99,7 @@ def sync():
     #print(len(sqlArr))
     #print(rows)
     file = None
-    with open('sql3_hk_tmp.db', 'rb') as fp:
+    with open('/tmp/sql3_hk_tmp.db', 'rb') as fp:
         file = FileStorage(fp)
         synchronizer = DbSynchronizer(file)
      
@@ -90,4 +107,5 @@ def sync():
         raise WebError("Synchronization failed", 500)
 
     synchronizer.execute_server_side_sql()
+    os.remove("/tmp/sql3_hk_tmp.db")
     return jsonify({'to_execute': synchronizer.get_client_sql()})

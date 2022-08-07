@@ -28,7 +28,16 @@ def get_string_ids_and_edit_timestamps():
             cur.execute("SELECT id, language, edited_at FROM string_content)")
             return {(id, lang): ts for id, lang, ts in cur}
 
+def update_ts(id,ts,tbl_name):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f'UPDATE {tbl_name} SET edited_at = %s WHERE id = %s', [ts,id])
 
+def get_string_ids_and_edit_timestamps_only(tbl_name):
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            cur.execute(f"SELECT id, edited_at FROM {tbl_name}")
+            return cur.fetchall()
 def execute_sql(sql, rows):
     with get_connection() as conn:
         with conn.cursor() as cur:
